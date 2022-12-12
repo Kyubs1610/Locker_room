@@ -5,6 +5,8 @@ import pkg from "pg";
 import bodyParser from "body-parser";
 import dbConnect from "./db/dbConnect.mjs";
 import bcrypt from 'bcrypt';
+// import path from 'path';
+// const __dirname = path.dirname(__filename);
 
 dbConnect();
 const app = express()
@@ -41,9 +43,11 @@ client.connect();
 
 const port = 3001;
 
+app.use( express.static( "public" ) );
 app.set('view-engine', 'ejs');
 app.use(bodyParser.json());
 app.use(express.json());
+
 
 app.use(
   bodyParser.urlencoded({
@@ -51,6 +55,7 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: false }))
+
 app.get("/homepage", (request, response) => {
   response.render('../pages/homepage.ejs', {name:'Diego'});
 });
@@ -72,6 +77,7 @@ app.post('/register', async(req,response)=>{
   }
 })
 
+
 app.get('/login',(req,res)=>{
   res.render('../pages/login.ejs')
 })
@@ -92,6 +98,7 @@ app.post('/login', (req,res)=>{
   })
 })
  
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
