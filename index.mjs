@@ -5,8 +5,7 @@ import pkg from "pg";
 import bodyParser from "body-parser";
 import dbConnect from "./db/dbConnect.mjs";
 import bcrypt from 'bcrypt';
-// import path from 'path';
-// const __dirname = path.dirname(__filename);
+
 
 dbConnect();
 const app = express()
